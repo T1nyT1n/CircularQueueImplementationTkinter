@@ -52,20 +52,21 @@ b_showall = t.Button(f_showall, text="Показать все", bg="LightSteelBl
 
 # Убрать элементы по условию
 
-comparing_sign = t.IntVar()
-comparing_sign.set(0)
+c.COMPARING_SIGN = t.IntVar()
+c.COMPARING_SIGN.set(0)
 
 lf_remove_by_condition = t.LabelFrame(c.W_MAIN, text="Удалить элементы по" \
     " условию")
-e_condition_number = t.Entry(lf_remove_by_condition, validate="key", \
+c.E_CONDITION_NUMBER = t.Entry(lf_remove_by_condition, validate="key", \
     validatecommand=validate_int)
 rb_less = t.Radiobutton(lf_remove_by_condition, text="<", \
-    variable=comparing_sign, value=0)
+    variable=c.COMPARING_SIGN, value=0)
 rb_more = t.Radiobutton(lf_remove_by_condition, text=">", \
-    variable=comparing_sign, value=1)
+    variable=c.COMPARING_SIGN, value=1)
 rb_equals = t.Radiobutton(lf_remove_by_condition, text="=", \
-    variable=comparing_sign, value=2)
-b_remove = t.Button(lf_remove_by_condition, text="Удалить", bg="lightyellow")
+    variable=c.COMPARING_SIGN, value=2)
+b_remove = t.Button(lf_remove_by_condition, text="Удалить", \
+    bg="lightyellow", command=business.RemoveElementsByCondition)
 
 # — РАЗМЕЩЕНИЕ ВИДЖЕТОВ —
 
@@ -101,7 +102,7 @@ b_showall.pack()
 # Убрать элементы по условию
 
 lf_remove_by_condition.pack()
-e_condition_number.pack(side=t.TOP, expand=True, fill="both", padx=5)
+c.E_CONDITION_NUMBER.pack(side=t.TOP, expand=True, fill="both", padx=5)
 rb_less.pack(side=t.LEFT, padx=5)
 rb_more.pack(side=t.LEFT, padx=5)
 rb_equals.pack(side=t.LEFT, padx=5)

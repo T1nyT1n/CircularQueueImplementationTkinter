@@ -38,6 +38,10 @@ def PopElement() -> int:
     global head, tail, count
     if EmptyQueue() != True:
         temp = head
+        """
+        Важно использовать is, а не ==, чтобы не возникало бесконечной 
+        рекурсии при проверке next, ведь очередь цикличная.
+        """
         if tail is head:
             head = None
             tail = None
@@ -75,19 +79,16 @@ def ShowAllElements():
     else:
         return -1
 
-def RemoveElementsByCondition(condition: str, num: int):
-    if EmptyQueue() != True:
-        for _ in range(count):
-            current_data = ReadElement()
+def RemoveElementsByCondition(condition: int, num: int):
+    if not EmptyQueue():
+        for i in range(count):
+            current_data = int(ReadElement())
             PopElement()
-            if condition == '<':
-                if current_data > num:
-                    PushElement(current_data)
-            if condition == '>':
-                if current_data < num:
-                    PushElement(current_data)
-            if condition == '=':
-                if current_data == num:
-                    PushElement(current_data)
+            if (condition == 0) and (current_data >= num):
+                PushElement(current_data)
+            elif (condition == 1) and (current_data <= num):
+                PushElement(current_data)
+            elif (condition == 2) and (current_data != num):
+                PushElement(current_data)
     else:
         return -1
